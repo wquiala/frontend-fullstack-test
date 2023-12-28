@@ -1,6 +1,7 @@
 import { instance } from './base.api';
 
 export const endpoint = 'file-system-entry';
+export const endpointUploadFile = 'file-system-entry/file/upload';
 
 export const fileSystemEntry = {
   getAll: function () {
@@ -30,5 +31,27 @@ export const fileSystemEntry = {
       parent,
       type,
     });
+  },
+
+  uploadFile: function ({
+    parent,
+    file,
+  }: {
+    parent: string;
+    file: File | Blob;
+  }) {
+    const formData = new FormData();
+
+    formData.append('file', file);
+    formData.append('parent', parent);
+    return instance.post(endpointUploadFile, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+  },
+
+  delete: function ({ id }: { id: string }) {
+    return instance.delete(`${endpoint}/${id}`);
   },
 };

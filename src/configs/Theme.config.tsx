@@ -1,5 +1,4 @@
-import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
-import React from 'react';
+import { ThemeProvider, createTheme } from '@mui/material';
 
 interface ThemeProps {
   children: React.JSX.Element;
@@ -7,16 +6,16 @@ interface ThemeProps {
 
 enum themePalet {
   BG = '#12181b',
-  LIME = '#C8FA5F',
+  BLUE = '#5f83fa',
   FONT_GLOBAL = "'JetBrains Mono', monospace",
 }
 const theme = createTheme({
   palette: {
-    mode: 'dark',
+    mode: 'light',
     background: {
-      default: themePalet.BG,
+      default: '#d3e3fd',
     },
-    primary: { main: themePalet.LIME },
+    primary: { main: '#rgb(251, 250, 250)' },
   },
   typography: {
     fontFamily: themePalet.FONT_GLOBAL,
@@ -27,7 +26,29 @@ const theme = createTheme({
         style: {
           textTransform: 'none',
           textShadow: 'none',
-          borderRadius: '0.5em',
+        },
+        disableTouchRipple: true,
+      },
+    },
+    MuiListItemButton: {
+      defaultProps: {
+        disableTouchRipple: true,
+      },
+    },
+    MuiMenuItem: {
+      defaultProps: {
+        disableTouchRipple: true,
+      },
+    },
+    MuiIconButton: {
+      defaultProps: {
+        disableTouchRipple: true,
+      },
+    },
+    MuiTextField: {
+      defaultProps: {
+        style: {
+          padding: 0,
         },
       },
     },
@@ -35,10 +56,5 @@ const theme = createTheme({
 });
 
 export const ThemeConfig: React.FC<ThemeProps> = ({ children }) => {
-  return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      {children}
-    </ThemeProvider>
-  );
+  return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 };
